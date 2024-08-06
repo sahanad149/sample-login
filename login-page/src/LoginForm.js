@@ -1,16 +1,19 @@
 import React from 'react';
 import { Box, Typography, Button, TextField } from '@mui/material';
-import { motion } from 'framer-motion';
 import { IoIosLogIn } from 'react-icons/io';
+import { motion } from 'framer-motion';
+import { useTheme } from 'styled-components';
 
 const LoginForm = () => {
+  const theme = useTheme();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
   };
 
   return (
-    <Box 
+    <Box
       component={motion.form}
       onSubmit={handleSubmit}
       initial={{ y: 100 }}
@@ -23,14 +26,16 @@ const LoginForm = () => {
         padding: 3,
         boxShadow: 3,
         borderRadius: 2,
-        backgroundColor: 'background.paper',
+        backgroundColor: theme.bodyBg,
       }}
     >
       <Typography
         variant="h4"
         textAlign="center"
         padding={2}
-        fontWeight={600}>
+        fontWeight={600}
+        sx={{ color: theme.titleColor }}
+      >
         Login
       </Typography>
       <TextField
@@ -38,14 +43,52 @@ const LoginForm = () => {
         label="Username"
         variant="outlined"
         fullWidth
-        sx={{ marginBottom: 2 }}
+        sx={{
+          marginBottom: 2,
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: theme.inputBorder,
+            },
+            '&:hover fieldset': {
+              borderColor: theme.inputBorderFocus,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: theme.inputBorderFocus,
+            },
+          },
+          '& .MuiInputBase-input': {
+            color: theme.titleColor,
+          },
+          '& .MuiInputLabel-root': {
+            color: theme.titleColor,
+          },
+        }}
       />
       <TextField
         type="password"
         label="Password"
         variant="outlined"
         fullWidth
-        sx={{ marginBottom: 2 }}
+        sx={{
+          marginBottom: 2,
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: theme.inputBorder,
+            },
+            '&:hover fieldset': {
+              borderColor: theme.inputBorderFocus,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: theme.inputBorderFocus,
+            },
+          },
+          '& .MuiInputBase-input': {
+            color: theme.titleColor,
+          },
+          '& .MuiInputLabel-root': {
+            color: theme.titleColor,
+          },
+        }}
       />
       <Button
         type="submit"
@@ -56,6 +99,12 @@ const LoginForm = () => {
           width: '100%',
           padding: '10px',
           borderRadius: 2,
+          bgcolor: theme.buttonBg,
+          color: theme.buttonColor,
+          ':hover': {
+            bgcolor: theme.buttonHoverBg,
+            color: theme.buttonColor,
+          },
         }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
